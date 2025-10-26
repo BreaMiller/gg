@@ -25,6 +25,20 @@
       }
     }(window.location))
   </script>
+  <script>
+    // Fix fetch requests for GitHub Pages subdirectory deployment
+    (function() {
+      const originalFetch = window.fetch;
+      const basePath = '/plex-';
+      
+      window.fetch = function(url, options) {
+        if (typeof url === 'string' && url.startsWith('/') && !url.startsWith(basePath)) {
+          url = basePath + url;
+        }
+        return originalFetch(url, options);
+      };
+    })();
+  </script>
   <script type="module" crossorigin src="./assets/index-B_LgNMPL.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-DXfxkgxF.css">
 </head>
