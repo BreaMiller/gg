@@ -28,29 +28,41 @@
   <script>
     // Fix fetch requests for GitHub Pages subdirectory deployment
     (function() {
-      const originalFetch = window.fetch;
       const basePath = '/plex-';
       
-      window.fetch = function(url, options) {
-        if (typeof url === 'string' && url.startsWith('/') && !url.startsWith(basePath)) {
-          url = basePath + url;
+      // Helper to fix URLs
+      function fixUrl(url) {
+        if (typeof url === 'string' && url.startsWith('/') && !url.startsWith(basePath) && !url.startsWith('data:') && !url.startsWith('blob:')) {
+          return basePath + url;
         }
-        return originalFetch(url, options);
+        return url;
+      }
+
+      // Fix fetch
+      const originalFetch = window.fetch;
+      window.fetch = function(url, options) {
+        return originalFetch(fixUrl(url), options);
       };
 
-      // Fix image sources
+      // Fix image sources via property
       const originalImageSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
       Object.defineProperty(HTMLImageElement.prototype, 'src', {
         get: function() {
           return originalImageSrc.get.call(this);
         },
         set: function(value) {
-          if (typeof value === 'string' && value.startsWith('/') && !value.startsWith(basePath) && !value.startsWith('data:')) {
-            value = basePath + value;
-          }
-          originalImageSrc.set.call(this, value);
+          originalImageSrc.set.call(this, fixUrl(value));
         }
       });
+
+      // Fix setAttribute for all elements
+      const originalSetAttribute = Element.prototype.setAttribute;
+      Element.prototype.setAttribute = function(name, value) {
+        if ((name === 'src' || name === 'href') && this.tagName !== 'SCRIPT' && this.tagName !== 'LINK') {
+          value = fixUrl(value);
+        }
+        return originalSetAttribute.call(this, name, value);
+      };
     })();
   </script>
   <script type="module" crossorigin src="./assets/index-B_LgNMPL.js"></script>
