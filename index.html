@@ -26,26 +26,47 @@
     }(window.location))
   </script>
   <script>
-    // Fix fetch requests for GitHub Pages subdirectory deployment
+    // Fix asset requests for GitHub Pages subdirectory deployment
     (function() {
-  const basePath = '';
-      
+      // Derive base path for GitHub Pages project sites ("/repo-name")
+      var pathSegs = window.location.pathname.split('/').filter(Boolean);
+      var basePath = pathSegs.length ? '/' + pathSegs[0] : '';
+
       // Helper to fix URLs
       function fixUrl(url) {
-        if (typeof url === 'string' && url.startsWith('/') && !url.startsWith(basePath) && !url.startsWith('data:') && !url.startsWith('blob:')) {
-          return basePath + url;
+        if (typeof url === 'string') {
+          if (url.startsWith('/') && !url.startsWith(basePath) && !url.startsWith('data:') && !url.startsWith('blob:')) {
+            return basePath + url;
+          }
+          return url;
+        }
+        // Support Request objects for fetch
+        if (url && typeof url === 'object' && 'url' in url) {
+          var fixed = fixUrl(String(url.url || ''));
+          if (fixed !== url.url) {
+            return new Request(fixed, url);
+          }
         }
         return url;
       }
 
       // Fix fetch
-      const originalFetch = window.fetch;
+      var originalFetch = window.fetch;
       window.fetch = function(url, options) {
         return originalFetch(fixUrl(url), options);
       };
 
+      // Fix XMLHttpRequest (used by Three.js FileLoader)
+      var originalXHROpen = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+        try {
+          url = fixUrl(url);
+        } catch (e) {}
+        return originalXHROpen.apply(this, [method, url, async, user, password]);
+      };
+
       // Fix image sources via property
-      const originalImageSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+      var originalImageSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
       Object.defineProperty(HTMLImageElement.prototype, 'src', {
         get: function() {
           return originalImageSrc.get.call(this);
@@ -56,7 +77,7 @@
       });
 
       // Fix setAttribute for all elements
-      const originalSetAttribute = Element.prototype.setAttribute;
+      var originalSetAttribute = Element.prototype.setAttribute;
       Element.prototype.setAttribute = function(name, value) {
         if ((name === 'src' || name === 'href') && this.tagName !== 'SCRIPT' && this.tagName !== 'LINK') {
           value = fixUrl(value);
@@ -65,9 +86,67 @@
       };
     })();
   </script>
+  <!-- Runtime Three.js material override hook for matte gunner model -->
+  <script>
+    // Hook Three.js to override gunner model materials after load
+    window.__FORCE_MATTE_GUNNER__ = true;
+    
+    // Monkey-patch GLTFLoader traverse to intercept material setup
+    (function() {
+      var checkInterval = setInterval(function() {
+        if (window.THREE && window.THREE.MeshStandardMaterial) {
+          clearInterval(checkInterval);
+          
+          // Store original setters
+          var originalMetalnessSetter = Object.getOwnPropertyDescriptor(window.THREE.MeshStandardMaterial.prototype, 'metalness').set;
+          var originalRoughnessSetter = Object.getOwnPropertyDescriptor(window.THREE.MeshStandardMaterial.prototype, 'roughness').set;
+          var originalEnvMapIntensitySetter = Object.getOwnPropertyDescriptor(window.THREE.MeshStandardMaterial.prototype, 'envMapIntensity').set;
+          
+          // Override setters to enforce matte for gunner materials
+          Object.defineProperty(window.THREE.MeshStandardMaterial.prototype, 'metalness', {
+            get: function() { return this._metalness || 0; },
+            set: function(value) {
+              // Force matte for gunner model (detected by blue color)
+              if (window.__FORCE_MATTE_GUNNER__ && this.color && this.color.getHexString && this.color.getHexString().match(/7aa2ff/i)) {
+                this._metalness = 0;
+              } else {
+                this._metalness = value;
+              }
+              if (originalMetalnessSetter) originalMetalnessSetter.call(this, this._metalness);
+            }
+          });
+          
+          Object.defineProperty(window.THREE.MeshStandardMaterial.prototype, 'roughness', {
+            get: function() { return this._roughness !== undefined ? this._roughness : 1; },
+            set: function(value) {
+              if (window.__FORCE_MATTE_GUNNER__ && this.color && this.color.getHexString && this.color.getHexString().match(/7aa2ff/i)) {
+                this._roughness = 1;
+              } else {
+                this._roughness = value;
+              }
+              if (originalRoughnessSetter) originalRoughnessSetter.call(this, this._roughness);
+            }
+          });
+          
+          Object.defineProperty(window.THREE.MeshStandardMaterial.prototype, 'envMapIntensity', {
+            get: function() { return this._envMapIntensity !== undefined ? this._envMapIntensity : 1; },
+            set: function(value) {
+              if (window.__FORCE_MATTE_GUNNER__ && this.color && this.color.getHexString && this.color.getHexString().match(/7aa2ff/i)) {
+                this._envMapIntensity = 0;
+              } else {
+                this._envMapIntensity = value;
+              }
+              if (originalEnvMapIntensitySetter) originalEnvMapIntensitySetter.call(this, this._envMapIntensity);
+            }
+          });
+        }
+      }, 50);
+    })();
+  </script>
+  
   <!-- Cache-busting query to avoid stale GH Pages caches after hot edits -->
-  <script type="module" crossorigin src="./assets/index-B_LgNMPL.js?v=20251032"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DXfxkgxF.css?v=20251032">
+  <script type="module" crossorigin src="./assets/index-B_LgNMPL.js?v=20251035"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DXfxkgxF.css?v=20251035">
 </head>
 
 <body>
