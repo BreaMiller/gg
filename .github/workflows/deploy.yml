@@ -34,20 +34,6 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Commit built files
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add dist/
-          git commit -m "chore: rebuild dist [skip ci]" || true
-
-      - name: Push built files
-        if: github.ref == 'refs/heads/gh-pages'
-        run: |
-          git push origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -57,6 +43,8 @@ jobs:
         if: github.ref == 'refs/heads/gh-pages'
         id: deployment
         uses: actions/deploy-pages@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   notify:
     needs: build-and-deploy
