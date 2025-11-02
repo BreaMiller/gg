@@ -1,0 +1,7 @@
+{
+	"name": "Amped Dev Container",
+	"image": "mcr.microsoft.com/devcontainers/base:alpine",
+	"forwardPorts": [43001],
+	"postCreateCommand": "npm install --no-audit --no-fund",
+	"remoteUser": "vscode"
+}
