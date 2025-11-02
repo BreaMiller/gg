@@ -11,6 +11,7 @@ import {
   X,
   Sparkles,
   Coins,
+  Wand2,
   Settings,
   LogOut
 } from 'lucide-react';
@@ -30,6 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCollapseChange }) => {
   const navigationItems = [
     { icon: LayoutDashboard, label: 'My Dashboard', path: '/', color: 'text-cyan-400' },
     { icon: Gamepad2, label: 'Arcade', path: '/games', color: 'text-indigo-400' },
+    { icon: Wand2, label: 'AI Game Generator', path: '/generate', color: 'text-purple-400' },
     { icon: Users, label: 'Creator Hub', path: '/community', color: 'text-green-400' },
     { icon: Settings, label: 'Settings', path: '/settings', color: 'text-blue-400' },
     { icon: HelpCircle, label: 'Help & Support', path: '/help', color: 'text-gray-400' }
@@ -68,12 +70,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onCollapseChange }) => {
       {/* User Credits (when logged in) */}
       {user && !isCollapsed && (
         <div className="p-4 border-b border-white/10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Coins className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" />
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-sm font-medium">Credits</span>
+          <div className="bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-indigo-600/30 rounded-lg p-3 border border-white/5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Coins className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent" />
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-sm font-medium">Credits</span>
+              </div>
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">{balance.toLocaleString()}</span>
             </div>
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">{balance.toLocaleString()}</span>
           </div>
         </div>
       )}
@@ -140,7 +144,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCollapseChange }) => {
                     className="w-8 h-8 rounded-full border border-white/20"
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-white text-sm font-medium truncate">@{user.username}</p>
+                    <p className="text-white text-sm font-medium truncate">{user.display_name}</p>
                     <p className="text-gray-400 text-xs truncate">@{user.username}</p>
                   </div>
                 </div>

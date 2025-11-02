@@ -2,6 +2,7 @@
 export { default as Dashboard } from './Dashboard';
 export { default as LoginPage } from './LoginPage';
 export { default as ArcadePage } from './ArcadePage';
+export { default as AIGameGeneratorPage } from './AIGameGeneratorPage';
 export { default as TrendingPage } from './TrendingPage';
 export { default as FeaturedPage } from './FeaturedPage';
 export { default as CreatorHubPage } from './CreatorHubPage';

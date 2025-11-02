@@ -89,6 +89,7 @@ const HomePage: React.FC = () => {
   };
 
   const quickActions = [
+    { icon: Sparkles, label: 'Generate Game', path: '/generate', color: 'from-purple-500 to-pink-500' },
     { icon: Coins, label: 'Pricing Guide', path: '/pricing', color: 'from-yellow-500 to-orange-500' },
     { icon: TrendingUp, label: 'Trending', path: '/trending', color: 'from-orange-500 to-red-500' },
     { icon: Star, label: 'Featured', path: '/featured', color: 'from-yellow-500 to-orange-500' },
@@ -292,7 +293,7 @@ const HomePage: React.FC = () => {
               </div>
               <Link
                 to={`/games/${featuredGames[0]?.game_id || '#'}`}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 w-full"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 w-full"
               >
                 <Play className="w-5 h-5" />
                 Play Now

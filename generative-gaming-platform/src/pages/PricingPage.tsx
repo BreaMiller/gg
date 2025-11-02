@@ -276,15 +276,15 @@ const PricingPage: React.FC = () => {
       <FadeInSection delay={400}>
         <div className="text-center">
           <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl border border-purple-400/30 p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Ready to Start Playing?</h2>
-            <p className="text-slate-300 mb-6">Join thousands of gamers discovering amazing games in our arcade.</p>
+            <h2 className="text-2xl font-bold text-white mb-4">Ready to Start Creating?</h2>
+            <p className="text-slate-300 mb-6">Join thousands of creators building amazing games with Amped.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
               <Link
-                to="/games"
+                to="/generate"
                 className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 transition-all duration-300 hover:scale-105 justify-center group"
               >
                 <Sparkles className="w-4 h-4" />
-                Explore Games
+                Start Creating
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link

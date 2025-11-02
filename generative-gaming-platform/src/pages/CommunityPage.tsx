@@ -121,7 +121,7 @@ const CommunityPage: React.FC = () => {
                           to={`/creators/${post.user_id}`}
                           className="text-white font-semibold hover:text-cyan-400 transition-colors"
                         >
-                          @{post.username}
+                          {author?.display_name || post.username}
                         </Link>
                         <span className="text-slate-400 text-sm">@{post.username}</span>
                         {author?.verified && (
@@ -269,7 +269,7 @@ const CommunityPage: React.FC = () => {
                 return (
                   <div key={event.event_id} className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-lg border border-white/10 p-4 hover:border-white/20 transition-all duration-200">
                     <h3 className="text-white font-semibold mb-1">{event.title}</h3>
-                    <p className="text-slate-400 text-sm mb-2">by @{event.host_username}</p>
+                    <p className="text-slate-400 text-sm mb-2">by {host?.display_name || event.host_username}</p>
                     
                     <p className="text-slate-300 text-sm mb-3 line-clamp-2">{event.description}</p>
                     
@@ -350,10 +350,10 @@ const CommunityPage: React.FC = () => {
                     <div className="flex items-center gap-2 mb-2">
                       <img 
                         src={author?.avatar_url || '/api/placeholder/20/20'} 
-                        alt={thread.author_username}
+                        alt={author?.display_name || thread.author_username}
                         className="w-5 h-5 rounded-full"
                       />
-                      <span className="text-slate-400 text-sm">@{thread.author_username}</span>
+                      <span className="text-slate-400 text-sm">{author?.display_name || thread.author_username}</span>
                     </div>
                     
                     <div className="flex justify-between text-xs text-slate-400">

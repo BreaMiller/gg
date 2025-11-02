@@ -54,6 +54,9 @@ const Footer: React.FC = () => {
               <Link to="/games" className="block text-slate-300 hover:text-cyan-400 transition-colors text-sm">
                 Arcade
               </Link>
+              <Link to="/generate" className="block text-slate-300 hover:text-cyan-400 transition-colors text-sm">
+                AI Game Generator
+              </Link>
               <Link to="/community" className="block text-slate-300 hover:text-cyan-400 transition-colors text-sm">
                 Creator Hub
               </Link>
