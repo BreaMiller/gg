@@ -46,7 +46,8 @@ const GameImage: React.FC<GameImageProps> = ({
 
   // Select fallback based on title hash to ensure consistency
   const fallbackIndex = title ? Math.abs(title.split('').reduce((a, b) => a + b.charCodeAt(0), 0)) % fallbackImages.length : 0;
-  const fallbackSrc = fallbackImages[fallbackIndex];
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const fallbackSrc = baseUrl + fallbackImages[fallbackIndex].replace(/^\//, '');
 
   // Ensure image src is properly formatted and handles both /imgs/ and /images/ paths
   const normalizedSrc = useMemo(() => {
@@ -57,7 +58,9 @@ const GameImage: React.FC<GameImageProps> = ({
     if (!normalized.startsWith('/')) {
       normalized = '/' + normalized;
     }
-    return normalized;
+    // Add base URL for proper asset resolution in production
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    return baseUrl + normalized.replace(/^\//, '');
   }, [src]);
 
   return (

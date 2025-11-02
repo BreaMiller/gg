@@ -198,12 +198,6 @@ const HomePage: React.FC = () => {
                 )}
               </div>
               
-              <button
-                type="submit"
-                className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white rounded-lg font-medium transition-all hover:scale-105"
-              >
-                Search
-              </button>
             </div>
           </div>
           
