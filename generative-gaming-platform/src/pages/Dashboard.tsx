@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, TrendingUp, Star, Users, Trophy, Zap, Gamepad2, ArrowRight, Play, Coins, Search, Clock, Flame, Heart } from 'lucide-react';
+import { Sparkles, TrendingUp, Star, Users, Trophy, Zap, Gamepad2, ArrowRight, Play, Coins, Search, Clock, Flame, Heart, Sliders } from 'lucide-react';
 import { useGameData } from '../contexts/GameDataContext';
 import GameCard from '../components/games/GameCard';
 import FadeInSection from '../components/ui/FadeInSection';
@@ -42,6 +42,9 @@ const HomePage: React.FC = () => {
   const [platformStats, setPlatformStats] = useState<PlatformStats | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
+  const [sortBy, setSortBy] = useState<'trending' | 'newest' | 'rating' | 'plays'>('trending');
+  const [filterGenre, setFilterGenre] = useState<string>('all');
   const [xpProgress, setXpProgress] = useState(65); // Example: 65% progress
   const [favoriteGames] = useState<GameItem[]>(trendingGames.slice(0, 8) || []);
   const [continuePlayingGames] = useState<GameItem[]>(featuredGames.slice(0, 6) || []);
@@ -104,9 +107,10 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-8">
-      {/* Search Games Bar */}
+      {/* Search Games Bar with Filter and Sort */}
       <FadeInSection>
-        <form onSubmit={handleSearch} className="relative">
+        <form onSubmit={handleSearch} className="relative space-y-3">
+          {/* Main Search Bar */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl blur-lg group-focus-within:blur-xl opacity-75 group-focus-within:opacity-100 transition-all" />
             <div className="relative flex items-center gap-3 bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 group-focus-within:border-pink-400/50 p-4 transition-all">
@@ -118,6 +122,82 @@ const HomePage: React.FC = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-1 bg-transparent text-white placeholder-slate-500 focus:outline-none"
               />
+              {/* Filter Button */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setShowFilterMenu(!showFilterMenu)}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors relative group/filter"
+                  title="Filter and sort options"
+                >
+                  <Sliders className="w-5 h-5 text-slate-400 group-hover/filter:text-cyan-400 transition-colors" />
+                </button>
+                
+                {/* Filter Menu Dropdown */}
+                {showFilterMenu && (
+                  <div className="absolute right-0 mt-2 w-56 bg-gradient-to-br from-slate-900 to-slate-800 backdrop-blur-xl rounded-xl border border-white/10 p-4 z-50 shadow-xl">
+                    {/* Sort Options */}
+                    <div className="mb-4">
+                      <p className="text-slate-300 text-sm font-semibold mb-2">Sort By</p>
+                      <div className="space-y-2">
+                        {[
+                          { value: 'trending', label: 'Trending' },
+                          { value: 'newest', label: 'Newest' },
+                          { value: 'rating', label: 'Top Rated' },
+                          { value: 'plays', label: 'Most Played' }
+                        ].map(option => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => setSortBy(option.value as any)}
+                            className={`w-full text-left px-3 py-2 rounded-lg transition-all ${
+                              sortBy === option.value
+                                ? 'bg-gradient-to-r from-purple-500/40 to-pink-500/40 text-white border border-purple-400/50'
+                                : 'bg-black/30 text-slate-300 hover:text-white hover:bg-white/10'
+                            }`}
+                          >
+                            {option.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Genre Filter */}
+                    <div className="border-t border-white/10 pt-4">
+                      <p className="text-slate-300 text-sm font-semibold mb-2">Genre</p>
+                      <div className="space-y-2">
+                        {[
+                          { value: 'all', label: 'All Genres' },
+                          { value: 'action', label: 'Action' },
+                          { value: 'puzzle', label: 'Puzzle' },
+                          { value: 'adventure', label: 'Adventure' },
+                          { value: 'strategy', label: 'Strategy' },
+                          { value: 'casual', label: 'Casual' }
+                        ].map(genre => (
+                          <button
+                            key={genre.value}
+                            type="button"
+                            onClick={() => setFilterGenre(genre.value)}
+                            className={`w-full text-left px-3 py-2 rounded-lg transition-all ${
+                              filterGenre === genre.value
+                                ? 'bg-gradient-to-r from-purple-500/40 to-pink-500/40 text-white border border-purple-400/50'
+                                : 'bg-black/30 text-slate-300 hover:text-white hover:bg-white/10'
+                            }`}
+                          >
+                            {genre.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Close button hint */}
+                    <div className="border-t border-white/10 pt-3 mt-3">
+                      <p className="text-slate-500 text-xs text-center">Click filter icon to close</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
               <button
                 type="submit"
                 className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white rounded-lg font-medium transition-all hover:scale-105"
@@ -126,6 +206,36 @@ const HomePage: React.FC = () => {
               </button>
             </div>
           </div>
+          
+          {/* Active Filters Display */}
+          {(sortBy !== 'trending' || filterGenre !== 'all') && (
+            <div className="flex gap-2 flex-wrap">
+              {sortBy !== 'trending' && (
+                <div className="px-3 py-1 bg-purple-500/20 border border-purple-400/50 rounded-full text-sm text-purple-300 flex items-center gap-2">
+                  <span>Sort: {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}</span>
+                  <button 
+                    type="button"
+                    onClick={() => setSortBy('trending')}
+                    className="ml-1 hover:text-purple-200"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+              {filterGenre !== 'all' && (
+                <div className="px-3 py-1 bg-pink-500/20 border border-pink-400/50 rounded-full text-sm text-pink-300 flex items-center gap-2">
+                  <span>Genre: {filterGenre.charAt(0).toUpperCase() + filterGenre.slice(1)}</span>
+                  <button 
+                    type="button"
+                    onClick={() => setFilterGenre('all')}
+                    className="ml-1 hover:text-pink-200"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </form>
       </FadeInSection>
 
@@ -317,67 +427,8 @@ const HomePage: React.FC = () => {
         </div>
       </FadeInSection>
 
-      {/* Platform Stats */}
-      <FadeInSection delay={300}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:scale-105 transition-all duration-300">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-slate-400 text-sm font-medium">Total Games</p>
-                {statsLoading ? (
-                  <div className="w-12 h-10 bg-slate-700 animate-pulse rounded" />
-                ) : (
-                  <p className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    {platformStats?.totalGames?.toLocaleString() || '0'}
-                  </p>
-                )}
-              </div>
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-xl flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-purple-400" />
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:scale-105 transition-all duration-300">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-slate-400 text-sm font-medium">Total Downloads</p>
-                {statsLoading ? (
-                  <div className="w-20 h-10 bg-slate-700 animate-pulse rounded" />
-                ) : (
-                  <p className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                    {platformStats?.totalDownloads?.toLocaleString() || '0'}
-                  </p>
-                )}
-              </div>
-              <div className="w-12 h-12 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-cyan-400" />
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:scale-105 transition-all duration-300">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-slate-400 text-sm font-medium">Active Creators</p>
-                {statsLoading ? (
-                  <div className="w-14 h-10 bg-slate-700 animate-pulse rounded" />
-                ) : (
-                  <p className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                    {platformStats?.activeCreators || '0'}
-                  </p>
-                )}
-              </div>
-              <div className="w-12 h-12 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-green-400" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </FadeInSection>
-
       {/* Featured & Trending Games Sections */}
-      <FadeInSection delay={350}>
+      <FadeInSection delay={300}>
         <section id="games-section">
           {featuredGames.length > 0 && (
             <div>
