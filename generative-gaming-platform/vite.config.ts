@@ -3,14 +3,12 @@ import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 import sourceIdentifierPlugin from 'vite-plugin-source-identifier'
 
-const isProd = process.env.BUILD_MODE === 'prod'
-
 export default defineConfig({
-  base: '/amped/',
+  base: process.env.NODE_ENV === 'production' ? '/amped/' : '/',
   plugins: [
     react(), 
     sourceIdentifierPlugin({
-      enabled: !isProd,
+      enabled: process.env.NODE_ENV !== 'production',
       attributePrefix: 'data-matrix',
       includeProps: true,
     })
