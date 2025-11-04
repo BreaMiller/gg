@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Clock, Zap, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Clock, Zap, CheckCircle, Route } from 'lucide-react';
 
 interface RoadmapItem {
   title: string;
@@ -15,6 +15,12 @@ interface RoadmapCarouselProps {
 const RoadmapCarousel: React.FC<RoadmapCarouselProps> = ({ items }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Sort items: upcoming first, then in-progress, then completed at the end
+  const sortedItems = items.sort((a, b) => {
+    const statusOrder: Record<string, number> = { 'upcoming': 0, 'in-progress': 1, 'completed': 2 };
+    return (statusOrder[a.status] || 3) - (statusOrder[b.status] || 3);
+  });
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -76,7 +82,7 @@ const RoadmapCarousel: React.FC<RoadmapCarouselProps> = ({ items }) => {
       {/* Header */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl mb-4">
-          <Zap className="w-8 h-8 text-white" />
+          <Route className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent mb-2">
           Platform Roadmap
@@ -114,7 +120,7 @@ const RoadmapCarousel: React.FC<RoadmapCarouselProps> = ({ items }) => {
           className="flex gap-6 overflow-x-hidden pb-8 px-16 scroll-smooth"
           onScroll={(e) => setScrollPosition(e.currentTarget.scrollLeft)}
         >
-          {items.map((item, idx) => (
+          {sortedItems.map((item, idx) => (
             <div
               key={idx}
               className="flex-shrink-0 w-72 relative"

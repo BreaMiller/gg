@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useCredits } from '../contexts/CreditContext';
 import { PRICING, formatCredits } from '../lib/pricing';
 import FadeInSection from '../components/ui/FadeInSection';
+import { Link } from 'react-router-dom';
 
 interface GeneratedGame {
   title: string;
@@ -716,6 +717,19 @@ public class PlayerController : MonoBehaviour
           )}
         </div>
       </div>
+
+      {/* View Generated Games Button */}
+      <FadeInSection delay={100}>
+        <div className="max-w-6xl mx-auto">
+          <Link
+            to="/games-generated"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105"
+          >
+            <Sparkles className="w-5 h-5" />
+            View All Generated Games
+          </Link>
+        </div>
+      </FadeInSection>
 
       {/* Generated Game Display */}
       {generatedGame && (

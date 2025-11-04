@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HelpCircle, Search, BookOpen, Lightbulb, Zap, Users, Headphones, Clock, CheckCircle, ArrowRight, BookMarked, Compass } from 'lucide-react';
+import { HelpCircle, Search, BookOpen, Lightbulb, Zap, Users, Headphones, Clock, CheckCircle, ArrowRight, BookMarked, Compass, Route } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FadeInSection from '../components/ui/FadeInSection';
 import RoadmapCarousel from '../components/ui/RoadmapCarousel';

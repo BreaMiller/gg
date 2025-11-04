@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import LoginPage from './pages/LoginPage';
 import ArcadePage from './pages/ArcadePage';
 import GeneratePage from './pages/GeneratePage';
+import GamesGeneratedPage from './pages/GamesGeneratedPage';
 import TrendingPage from './pages/TrendingPage';
 import FeaturedPage from './pages/FeaturedPage';
 import CreatorHubPage from './pages/CreatorHubPage';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
                 <Route index element={<Dashboard />} />
                 <Route path="games" element={<ArcadePage />} />
                 <Route path="generate" element={<GeneratePage />} />
+                <Route path="games-generated" element={<GamesGeneratedPage />} />
                 <Route path="trending" element={<TrendingPage />} />
                 <Route path="featured" element={<FeaturedPage />} />
                 <Route path="community" element={<CreatorHubPage />} />

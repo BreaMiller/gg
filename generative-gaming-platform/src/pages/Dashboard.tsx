@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, TrendingUp, Star, Users, Trophy, Zap, Gamepad2, ArrowRight, Play, Coins, Search, Clock, Flame, Heart, Sliders, UserPlus, MessageCircle, Download, Settings, Gamepad } from 'lucide-react';
+import { Sparkles, TrendingUp, Star, Users, Trophy, Zap, Gamepad2, ArrowRight, Play, Coins, Search, Clock, Flame, Heart, Sliders, UserPlus, MessageCircle, Download, Settings, Gamepad, Wand2 } from 'lucide-react';
 import { useGameData } from '../contexts/GameDataContext';
 import GameCard from '../components/games/GameCard';
 import FadeInSection from '../components/ui/FadeInSection';
@@ -49,6 +49,7 @@ const HomePage: React.FC = () => {
   const [xpProgress, setXpProgress] = useState(65); // Example: 65% progress
   const [favoriteGames] = useState<GameItem[]>(trendingGames.slice(0, 8) || []);
   const [continuePlayingGames] = useState<GameItem[]>(featuredGames.slice(0, 6) || []);
+  const [generatedGames] = useState<GameItem[]>(trendingGames.slice(0, 4) || []);
   const [recentActivity] = useState<RecentActivity[]>([
     { id: '1', type: 'played', gameName: 'Space Quest', timestamp: '2 hours ago' },
     { id: '2', type: 'created', gameName: 'My First Game', timestamp: '1 day ago' },
@@ -92,7 +93,7 @@ const HomePage: React.FC = () => {
 
   const quickActions = [
     { icon: Sparkles, label: 'Generate Game', path: '/generate', color: 'from-purple-500 to-pink-500', iconHoverColor: '#ec4899' },
-    { icon: Coins, label: 'Pricing Guide', path: '/pricing', color: 'from-yellow-500 to-orange-500', iconHoverColor: '#f97316' },
+    { icon: Coins, label: 'Pricing Guide', path: '/pricing', color: 'from-yellow-500 to-orange-500', iconHoverColor: '#fbbf24' },
     { icon: Gamepad, label: 'Arcade', path: '/arcade', color: 'from-orange-500 to-red-500', iconHoverColor: '#ef4444' },
     { icon: Gamepad2, label: 'Gamer Hub', path: '/creator-hub', color: 'from-yellow-500 to-orange-500', iconHoverColor: '#f97316' },
     { icon: Settings, label: 'Settings', path: '/settings', color: 'from-blue-500 to-cyan-500', iconHoverColor: '#06b6d4' }
@@ -547,6 +548,32 @@ const HomePage: React.FC = () => {
                 ))}
               </div>
             </div>
+          )}
+
+          {generatedGames.length > 0 && (
+            <FadeInSection delay={350}>
+              <div className="mt-12">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                    <Wand2 className="w-6 h-6 text-slate-400" />
+                    Games Generated
+                  </h2>
+                  <Link
+                    to="/games-generated"
+                    className="text-purple-400 hover:text-purple-300 text-sm font-semibold flex items-center gap-1 transition-colors"
+                  >
+                    View All <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {generatedGames.map(game => (
+                    <div key={game.game_id}>
+                      <GameCard game={game as any} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeInSection>
           )}
 
           {trendingGames.length > 0 && (
