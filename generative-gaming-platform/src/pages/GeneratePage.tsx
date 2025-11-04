@@ -101,10 +101,10 @@ const GeneratePage: React.FC = () => {
   const deviceOptions = ['Desktop', 'Mobile', 'Tablet'];
 
   const generatedImages = [
-    { id: 1, src: 'https://i.imgur.com/c0lJMKl.jpeg?q=80&w=800&h=800&auto=format&fit=crop' },
-    { id: 2, src: 'https://i.imgur.com/KnEni9u.png?q=80&w=800&h=800&auto=format&fit=crop' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1635322966219-b75ed372eb01?q=80&w=800&h=800&auto=format&fit=crop' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&h=800&auto=format&fit=crop' }
+    { id: 1, src: 'https://i.imgur.com/c0lJMKl.jpeg?q=80&w=800&h=1600&auto=format&fit=crop' },
+    { id: 2, src: 'https://i.imgur.com/KnEni9u.png?q=80&w=800&h=1600&auto=format&fit=crop' },
+    { id: 3, src: 'https://i.imgur.com/uwpjtqs.jpeg?q=80&w=800&h=1600&auto=format&fit=crop' },
+    { id: 4, src: 'https://i.imgur.com/hTt7djC.jpeg?q=80&w=800&h=800&auto=format&fit=crop' }
   ];
 
   return (

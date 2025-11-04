@@ -45,35 +45,35 @@ const GameImage: React.FC<GameImageProps> = ({
     '/imgs/futuristic_cyberpunk_neon_gaming_logo_transparent.png'
   ];
 
-  // Get base URL from environment or use /gg/ as fallback for GitHub Pages
-  const baseUrl = import.meta.env.BASE_URL || '/gg/';
+  // Get base URL from environment
+  const baseUrl = import.meta.env.BASE_URL;
 
   // Construct proper URLs with base path
   const normalizedSrc = useMemo(() => {
     if (!src) return null;
     
-    // Normalize the path - handle both /images/ and /imgs/
-    let normalized = src;
-    
     // Replace /images/ with /imgs/ if present
-    normalized = normalized.replace(/\/images\//g, '/imgs/');
+    let normalized = src.replace(/\/images\//g, '/imgs/');
     
-    // Ensure exactly one leading slash
-    normalized = '/' + normalized.replace(/^\/+/, '');
+    // Remove leading slash to make it relative (so it works with base URL)
+    if (normalized.startsWith('/')) {
+      normalized = normalized.substring(1);
+    }
     
-    // Combine with base URL (base already has trailing slash)
-    const fullUrl = baseUrl.endsWith('/') 
-      ? baseUrl + normalized.substring(1)
-      : baseUrl + normalized;
-    
-    return fullUrl;
+    // Combine with base URL
+    return baseUrl + normalized;
   }, [src, baseUrl]);
 
   // Select fallback based on title hash
   const fallbackIndex = title ? Math.abs(title.split('').reduce((a, b) => a + b.charCodeAt(0), 0)) % fallbackImages.length : 0;
-  const fallbackUrl = baseUrl.endsWith('/') 
-    ? baseUrl + fallbackImages[fallbackIndex].substring(1)
-    : baseUrl + fallbackImages[fallbackIndex];
+  
+  const fallbackUrl = useMemo(() => {
+    let path = fallbackImages[fallbackIndex];
+    if (path.startsWith('/')) {
+      path = path.substring(1);
+    }
+    return baseUrl + path;
+  }, [baseUrl, fallbackIndex]);
 
   return (
     <div className={`${aspectClasses[aspectRatio]} overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 ${className}`}>
