@@ -187,7 +187,7 @@ const HelpSupportPage: React.FC = () => {
                       {category.id === 'credits' ? (
                         <>
                           <BarChart3 className="w-4 h-4" />
-                          <span>VIEW CHART</span>
+                          <span>View Chart</span>
                         </>
                       ) : (
                         <>
