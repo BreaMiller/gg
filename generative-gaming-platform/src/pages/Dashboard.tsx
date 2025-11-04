@@ -60,7 +60,8 @@ const HomePage: React.FC = () => {
     const fetchPlatformStats = async () => {
       try {
         setStatsLoading(true);
-        const response = await fetch('/api/platform/stats.json');
+        const basePath = import.meta.env.BASE_URL;
+        const response = await fetch(`${basePath}api/platform/stats.json`);
         if (!response.ok) {
           throw new Error('Failed to fetch platform statistics');
         }

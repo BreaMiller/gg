@@ -105,14 +105,16 @@ export const GameDataProvider: React.FC<GameDataProviderProps> = ({ children }) 
   useEffect(() => {
     const loadData = async () => {
       try {
+        // Use import.meta.env.BASE_URL to account for Vite's base path configuration
+        const basePath = import.meta.env.BASE_URL;
         const [userGamesRes, officialGamesRes, reviewsRes, usersRes, leaderboardsRes, communityRes, creditsRes] = await Promise.all([
-          fetch('/data/mockup_user_games.json'),
-          fetch('/data/official_games_content.json'),
-          fetch('/data/mockup_reviews.json'),
-          fetch('/data/mockup_users.json'),
-          fetch('/data/mockup_leaderboards.json'),
-          fetch('/data/mockup_community.json'),
-          fetch('/data/mockup_credits.json')
+          fetch(`${basePath}data/mockup_user_games.json`),
+          fetch(`${basePath}data/official_games_content.json`),
+          fetch(`${basePath}data/mockup_reviews.json`),
+          fetch(`${basePath}data/mockup_users.json`),
+          fetch(`${basePath}data/mockup_leaderboards.json`),
+          fetch(`${basePath}data/mockup_community.json`),
+          fetch(`${basePath}data/mockup_credits.json`)
         ]);
 
         const userGamesData = await userGamesRes.json();

@@ -66,7 +66,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
       // Fetch users data for mock authentication
-      const response = await fetch('/data/mockup_users.json');
+      // Use import.meta.env.BASE_URL to account for Vite's base path configuration
+      const basePath = import.meta.env.BASE_URL;
+      const response = await fetch(`${basePath}data/mockup_users.json`);
       const userData = await response.json();
       
       const foundUser = userData.users_database.users.find(
