@@ -105,7 +105,7 @@
         "last_updated": "2025-08-30T15:45:00Z",
         "version": "1.2.8",
         "tags": ["retro", "8bit", "shooter", "arcade", "pixel-art"],
-        "cover_image": "/images/stellar_conquest_clean.png",
+        "cover_image": "/imgs/retro_blast_arena_clean.png",
         "screenshots": [
           "https://cdn.gameplatform.com/games/retro-blast/screen1.jpg",
           "https://cdn.gameplatform.com/games/retro-blast/screen2.jpg"
@@ -210,45 +210,18 @@
         }
       },
       {
-        "game_id": "ug_006",
+        "game_id": "ug_003",
         "title": "Stellar Conquest",
-        "creator_id": "usr_001",
-        "creator_username": "PixelMaster_89",
+        "creator_id": "usr_003",
+        "creator_username": "CyberNinja_X",
         "category": "Strategy",
-        "subcategory": "Real-time Strategy",
-        "description": "Command fleets across the galaxy in this space RTS. Manage resources, research technologies, and engage in epic space battles to claim the stars.",
-        "created_date": "2025-11-20T11:45:00Z",
-        "last_updated": "2025-03-15T14:10:00Z",
-        "version": "1.1.2",
-        "tags": ["strategy", "space", "rts", "fleet", "conquest"],
+        "subcategory": "4X Strategy",
+        "description": "Build an intergalactic empire in this turn-based strategy game. Explore, build, conquer and diplomacy your way to victory.",
+        "created_date": "2025-07-08T11:20:00Z",
+        "last_updated": "2025-12-15T14:45:00Z",
+        "version": "2.1.0",
+        "tags": ["strategy", "space", "4x", "turn-based", "empire"],
         "cover_image": "/imgs/stellar_conquest_clean.png",
-        "screenshots": [
-          "https://cdn.gameplatform.com/games/stellar-conquest/screen1.jpg",
-          "https://cdn.gameplatform.com/games/stellar-conquest/screen2.jpg",
-          "https://cdn.gameplatform.com/games/stellar-conquest/screen3.jpg"
-        ],
-        "gameplay_video": "https://cdn.gameplatform.com/games/stellar-conquest/gameplay.mp4",
-        "stats": {
-          "downloads": 7820,
-          "plays": 19650,
-          "favorites": 423,
-          "rating": 4.6,
-          "total_ratings": 145,
-          "featured": false
-        },
-        "technical_info": {
-          "file_size": "38.9 MB",
-          "platform_compatibility": ["Web", "Windows", "Mac"],
-          "controls": "Mouse",
-          "estimated_playtime": "3-5 hours"
-        },
-        "monetization": {
-          "is_premium": true,
-          "premium_price": 799,
-          "credits_earned": 54740,
-          "revenue_share": "70%"
-        }
-      }
     ]
   }
 }
