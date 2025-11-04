@@ -120,9 +120,9 @@ const GeneratePage: React.FC = () => {
                 <img 
                   src={image.src} 
                   alt={`Generated ${idx + 1}`}
-                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
+                  className="w-full h-full object-cover transition-all duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <div className="flex items-center gap-2">
                       <button className="flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-sm font-medium bg-white/10 hover:bg-white/20 transition-colors">
@@ -258,7 +258,7 @@ const GeneratePage: React.FC = () => {
                       setPrompt(prompt + motionFragment);
                     }
                   }}
-                  className="w-full px-2 py-1.5 rounded text-xs bg-slate-800 border border-slate-700 text-slate-300 focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2 rounded-lg text-xs bg-gradient-to-br from-slate-800/80 to-slate-700/80 border border-white/10 text-slate-300 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all"
                 >
                   {motionPresets.map((m) => (
                     <option key={m} value={m.toLowerCase().replace(/\s+/g, '-')}>
@@ -274,7 +274,7 @@ const GeneratePage: React.FC = () => {
                 <select 
                   value={promptEnhance} 
                   onChange={(e) => setPromptEnhance(e.target.value)}
-                  className="w-full px-2 py-1.5 rounded text-xs bg-slate-800 border border-slate-700 text-slate-300 focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2 rounded-lg text-xs bg-gradient-to-br from-slate-800/80 to-slate-700/80 border border-white/10 text-slate-300 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all"
                 >
                   <option value="auto">Auto</option>
                   <option value="on">On</option>
@@ -294,7 +294,7 @@ const GeneratePage: React.FC = () => {
                       setPrompt(prompt + `, ${e.target.value} themed`);
                     }
                   }}
-                  className="w-full px-2 py-1.5 rounded text-xs bg-slate-800 border border-slate-700 text-slate-300 focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2 rounded-lg text-xs bg-gradient-to-br from-slate-800/80 to-slate-700/80 border border-white/10 text-slate-300 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all"
                 >
                   {themePresets.map((t) => (
                     <option key={t} value={t.toLowerCase()}>
@@ -316,7 +316,7 @@ const GeneratePage: React.FC = () => {
                       setPrompt(prompt + `, ${e.target.value} lighting`);
                     }
                   }}
-                  className="w-full px-2 py-1.5 rounded text-xs bg-slate-800 border border-slate-700 text-slate-300 focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2 rounded-lg text-xs bg-gradient-to-br from-slate-800/80 to-slate-700/80 border border-white/10 text-slate-300 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all"
                 >
                   {lightingPresets.map((l) => (
                     <option key={l} value={l.toLowerCase().replace(/\s+/g, '-')}>
