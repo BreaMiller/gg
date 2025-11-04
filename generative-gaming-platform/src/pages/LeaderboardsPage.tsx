@@ -75,9 +75,13 @@ const LeaderboardsPage: React.FC = () => {
                 <div className="flex items-center gap-3">
                   {entry.avatar_url && (
                     <img 
-                      src={entry.avatar_url}
+                      src={(import.meta.env.BASE_URL || '/gg/') + (entry.avatar_url || '').replace(/^\/+/, '')}
                       alt={entry.display_name || entry.game_title}
-                      className="w-10 h-10 rounded-full border border-white/20"
+                      className="w-10 h-10 rounded-full border border-white/20 object-cover"
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        img.src = (import.meta.env.BASE_URL || '/gg/') + 'imgs/dark-cyberpunk-city-neon-gaming-background.jpg';
+                      }}
                     />
                   )}
                   {entry.cover_image && (

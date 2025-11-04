@@ -111,9 +111,13 @@ const CommunityPage: React.FC = () => {
                   {/* Post Header */}
                   <div className="flex items-center gap-3 mb-4">
                     <img 
-                      src={author?.avatar_url || '/api/placeholder/40/40'} 
+                      src={(import.meta.env.BASE_URL || '/gg/') + (author?.avatar_url || '').replace(/^\/+/, '') || (import.meta.env.BASE_URL || '/gg/') + 'api/placeholder/40/40'} 
                       alt={author?.display_name || post.username}
-                      className="w-10 h-10 rounded-full border border-white/20"
+                      className="w-10 h-10 rounded-full border border-white/20 object-cover"
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        img.src = (import.meta.env.BASE_URL || '/gg/') + 'imgs/dark-cyberpunk-city-neon-gaming-background.jpg';
+                      }}
                     />
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
@@ -351,7 +355,7 @@ const CommunityPage: React.FC = () => {
                       <img 
                         src={(import.meta.env.BASE_URL || '/gg/') + (author?.avatar_url || '').replace(/^\/+/, '') || (import.meta.env.BASE_URL || '/gg/') + 'api/placeholder/20/20'} 
                         alt={author?.display_name || thread.author_username}
-                        className="w-5 h-5 rounded-full"
+                        className="w-5 h-5 rounded-full object-cover"
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
                           img.src = (import.meta.env.BASE_URL || '/gg/') + 'imgs/dark-cyberpunk-city-neon-gaming-background.jpg';
