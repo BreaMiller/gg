@@ -453,9 +453,13 @@ const CreatorHubPage: React.FC = () => {
                     
                     <div className="flex items-center gap-2 mb-2">
                       <img 
-                        src={author?.avatar_url || '/api/placeholder/20/20'} 
+                        src={(import.meta.env.BASE_URL || '/gg/') + (author?.avatar_url || '').replace(/^\/+/, '') || (import.meta.env.BASE_URL || '/gg/') + 'api/placeholder/20/20'} 
                         alt={author?.display_name || thread.author_username}
                         className="w-5 h-5 rounded-full"
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          img.src = (import.meta.env.BASE_URL || '/gg/') + 'imgs/dark-cyberpunk-city-neon-gaming-background.jpg';
+                        }}
                       />
                       <span className="text-slate-400 text-sm">{author?.display_name || thread.author_username}</span>
                     </div>
