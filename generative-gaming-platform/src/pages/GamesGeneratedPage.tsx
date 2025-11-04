@@ -51,20 +51,11 @@ const GamesGeneratedPage: React.FC = () => {
           >
             <ArrowLeft className="w-6 h-6 text-slate-400 hover:text-white transition-colors" />
           </button>
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 flex items-center gap-3">
-              <Wand2 className="w-8 h-8 text-cyan-400" />
-              Games Generated
-            </h1>
-            <p className="text-slate-400">
-              Discover all AI-generated games on the platform
-            </p>
-          </div>
         </div>
       </FadeInSection>
 
-      {/* Stats Row */}
-      <FadeInSection delay={50}>
+      {/* Stats Row - Moved below search */}
+      <FadeInSection delay={100}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-4">
             <div className="flex items-center gap-3">
@@ -258,7 +249,7 @@ const GamesGeneratedPage: React.FC = () => {
         </FadeInSection>
       )}
 
-      {/* Games Grid */}
+      {/* Games Grid - Masonic Layout */}
       <FadeInSection delay={150}>
         <div className="space-y-4">
           {sortedGames.length > 0 ? (
@@ -266,9 +257,18 @@ const GamesGeneratedPage: React.FC = () => {
               <p className="text-slate-400 text-sm">
                 Showing {sortedGames.length} of {allGeneratedGames.length} games
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {sortedGames.map(game => (
-                  <div key={game.game_id}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-max">
+                {sortedGames.map((game, index) => (
+                  <div key={game.game_id} className={`${
+                    index === 0 ? 'sm:col-span-2 lg:col-span-2 lg:row-span-2' :
+                    index === 1 ? 'sm:col-span-1 lg:col-span-1' :
+                    index === 2 ? 'sm:col-span-1 lg:col-span-1' :
+                    index === 3 ? 'sm:col-span-1 lg:col-span-2' :
+                    index === 4 ? 'sm:col-span-1 lg:col-span-1' :
+                    index === 5 ? 'sm:col-span-1 lg:col-span-1' :
+                    index === 6 ? 'sm:col-span-2 lg:col-span-2' :
+                    'sm:col-span-1 lg:col-span-1'
+                  }`}>
                     <GameCard game={game as any} />
                   </div>
                 ))}

@@ -435,8 +435,35 @@ const HomePage: React.FC = () => {
         </div>
       </FadeInSection>
 
-      {/* Favorite Games Carousel */}
+      {/* Games Generated Section - Moved to top */}
       <FadeInSection delay={250}>
+        {generatedGames.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                <Wand2 className="w-6 h-6 text-slate-400" />
+                Games Generated
+              </h2>
+              <Link
+                to="/games-generated"
+                className="text-purple-400 hover:text-purple-300 text-sm font-semibold flex items-center gap-1 transition-colors"
+              >
+                View All <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {generatedGames.map(game => (
+                <div key={game.game_id}>
+                  <GameCard game={game as any} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </FadeInSection>
+
+      {/* Favorite Games Carousel */}
+      <FadeInSection delay={300}>
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Heart className="w-6 h-6 text-slate-400" />
@@ -525,7 +552,7 @@ const HomePage: React.FC = () => {
       </FadeInSection>
 
       {/* Featured & Trending Games Sections */}
-      <FadeInSection delay={300}>
+      <FadeInSection delay={350}>
         <section id="games-section">
           {featuredGames.length > 0 && (
             <div>
@@ -548,32 +575,6 @@ const HomePage: React.FC = () => {
                 ))}
               </div>
             </div>
-          )}
-
-          {generatedGames.length > 0 && (
-            <FadeInSection delay={350}>
-              <div className="mt-12">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                    <Wand2 className="w-6 h-6 text-slate-400" />
-                    Games Generated
-                  </h2>
-                  <Link
-                    to="/games-generated"
-                    className="text-purple-400 hover:text-purple-300 text-sm font-semibold flex items-center gap-1 transition-colors"
-                  >
-                    View All <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {generatedGames.map(game => (
-                    <div key={game.game_id}>
-                      <GameCard game={game as any} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </FadeInSection>
           )}
 
           {trendingGames.length > 0 && (
