@@ -10,4 +10,5 @@ export { default as CreatorHubPage } from './CreatorHubPage';
 export { default as LeaderboardsPage } from './LeaderboardsPage';
 export { default as SettingsPage } from './SettingsPage';
 export { default as HelpSupportPage } from './HelpSupportPage';
+export { default as HelpArticlePage } from './HelpArticlePage';
 export { default as PricingPage } from './PricingPage';

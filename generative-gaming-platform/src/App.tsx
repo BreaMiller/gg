@@ -15,6 +15,7 @@ import CreatorHubPage from './pages/CreatorHubPage';
 import LeaderboardsPage from './pages/LeaderboardsPage';
 import SettingsPage from './pages/SettingsPage';
 import HelpSupportPage from './pages/HelpSupportPage';
+import HelpArticlePage from './pages/HelpArticlePage';
 import PricingPage from './pages/PricingPage';
 import ArticlePage from './pages/ArticlePage';
 import './App.css';
@@ -41,6 +42,7 @@ const App: React.FC = () => {
                 <Route path="leaderboards" element={<LeaderboardsPage />} />
                 <Route path="settings" element={<SettingsPage />} />
                 <Route path="help" element={<HelpSupportPage />} />
+                <Route path="help-article/:articleId" element={<HelpArticlePage />} />
                 <Route path="pricing" element={<PricingPage />} />
                 <Route path="article/:articleId" element={<ArticlePage />} />
                 

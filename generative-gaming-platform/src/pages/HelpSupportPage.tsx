@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HelpCircle, Search, BookOpen, Lightbulb, Zap, Users, Headphones, Clock, CheckCircle, ArrowRight, BookMarked, Compass, Route } from 'lucide-react';
+import { HelpCircle, Search, BookOpen, Lightbulb, Zap, Users, Headphones, Clock, CheckCircle, ArrowRight, BookMarked, Compass, Route, BarChart3 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FadeInSection from '../components/ui/FadeInSection';
 import RoadmapCarousel from '../components/ui/RoadmapCarousel';
@@ -184,8 +184,17 @@ const HelpSupportPage: React.FC = () => {
                     <h3 className="text-lg font-semibold text-white mb-2">{category.title}</h3>
                     <p className="text-slate-400 text-sm mb-4">{category.description}</p>
                     <div className="flex items-center gap-2 text-cyan-400 text-sm font-medium">
-                      <span>{category.articles.length} articles</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      {category.id === 'credits' ? (
+                        <>
+                          <BarChart3 className="w-4 h-4" />
+                          <span>VIEW CHART</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>{category.articles.length} articles</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
                     </div>
                   </button>
                 );
@@ -225,9 +234,17 @@ const HelpSupportPage: React.FC = () => {
             {/* Articles List */}
             <div className="space-y-4">
               {selectedCategoryData.articles.map((article, idx) => (
-                <div
+                <button
                   key={idx}
-                  className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:border-white/20 transition-all group cursor-pointer"
+                  onClick={() => {
+                    // Convert article title to URL-friendly ID
+                    const articleId = article.title
+                      .toLowerCase()
+                      .replace(/[?!]/g, '')
+                      .replace(/\s+/g, '-');
+                    navigate(`/help-article/${articleId}`);
+                  }}
+                  className="w-full text-left bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:border-white/20 transition-all group cursor-pointer"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
@@ -238,7 +255,7 @@ const HelpSupportPage: React.FC = () => {
                     </div>
                     <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-cyan-400 flex-shrink-0 mt-1 group-hover:translate-x-1 transition-all" />
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>
