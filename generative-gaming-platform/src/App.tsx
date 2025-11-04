@@ -15,6 +15,7 @@ import LeaderboardsPage from './pages/LeaderboardsPage';
 import SettingsPage from './pages/SettingsPage';
 import HelpSupportPage from './pages/HelpSupportPage';
 import PricingPage from './pages/PricingPage';
+import ArticlePage from './pages/ArticlePage';
 import './App.css';
 
 const App: React.FC = () => {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
                 <Route path="settings" element={<SettingsPage />} />
                 <Route path="help" element={<HelpSupportPage />} />
                 <Route path="pricing" element={<PricingPage />} />
+                <Route path="article/:articleId" element={<ArticlePage />} />
                 
                 {/* Redirect unknown routes to home */}
                 <Route path="*" element={<Navigate to="/" replace />} />

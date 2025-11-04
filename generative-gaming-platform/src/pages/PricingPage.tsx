@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coins, Sparkles, Play, Download, Trophy, Gift, Crown, Zap, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Coins, Sparkles, Play, Download, Trophy, Gift, Crown, Zap, ArrowRight, ArrowLeft, BookMarked } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import FadeInSection from '../components/ui/FadeInSection';
 
@@ -268,6 +268,63 @@ const PricingPage: React.FC = () => {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </FadeInSection>
+
+      {/* Pricing Guide Articles */}
+      <FadeInSection delay={400}>
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <BookMarked className="w-6 h-6 text-cyan-400" />
+            Pricing Guide Articles
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:scale-105 transition-all duration-300 group cursor-pointer">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <Coins className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                Maximizing Your Credit Earnings
+              </h3>
+              <p className="text-slate-300 text-sm mb-4 leading-relaxed">
+                Learn proven strategies to earn more credits through game creation, community challenges, and achievement unlocks. Discover how top creators maximize their revenue on the platform.
+              </p>
+              <Link to="/article/maximizing-credit-earnings" className="text-cyan-400 hover:text-cyan-300 font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                Read Article <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:scale-105 transition-all duration-300 group cursor-pointer">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                Getting the Best Value for Your Investment
+              </h3>
+              <p className="text-slate-300 text-sm mb-4 leading-relaxed">
+                Compare credit packages and find the perfect plan for your needs. Learn how to optimize your spending and unlock exclusive bonuses available to long-term members.
+              </p>
+              <Link to="/article/getting-best-value" className="text-cyan-400 hover:text-cyan-300 font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                Read Article <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-6 hover:scale-105 transition-all duration-300 group cursor-pointer">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <Trophy className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                Credit Economy Explained
+              </h3>
+              <p className="text-slate-300 text-sm mb-4 leading-relaxed">
+                Understand how the platform's economy works. Learn about credit inflation prevention, fair pricing, and how to predict future pricing trends for better planning.
+              </p>
+              <Link to="/article/credit-economy" className="text-cyan-400 hover:text-cyan-300 font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                Read Article <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </FadeInSection>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HelpCircle, Search, BookOpen, Lightbulb, Zap, Users, Headphones, Clock, CheckCircle, ArrowRight, BookMarked, Compass } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FadeInSection from '../components/ui/FadeInSection';
+import RoadmapCarousel from '../components/ui/RoadmapCarousel';
 
 const HelpSupportPage: React.FC = () => {
   const navigate = useNavigate();
@@ -248,88 +249,70 @@ const HelpSupportPage: React.FC = () => {
       {!searchQuery && !selectedCategory && (
         <FadeInSection delay={300}>
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl mb-4">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent mb-2">
-                Platform Roadmap
-              </h2>
-              <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                Our journey to revolutionize game creation through AI
-              </p>
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-              {/* In Progress */}
-              <div className="flex-1 space-y-4">
-                <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-orange-400/30 p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Clock className="w-6 h-6 text-orange-400" />
-                    <h3 className="text-lg font-semibold text-white">In Progress</h3>
-                  </div>
-                  <p className="text-slate-400 text-sm">Building new features</p>
-                </div>
-                <div className="space-y-3">
-                  {[
-                    'Advanced AI Game Physics',
-                    'Real-time Multiplayer Support',
-                    'Enhanced 3D Asset Library'
-                  ].map((item, idx) => (
-                    <div key={idx} className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-4 hover:scale-[1.02] transition-all">
-                      <p className="text-white font-medium">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Up Next */}
-              <div className="flex-1 space-y-4">
-                <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-cyan-400/30 p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Zap className="w-6 h-6 text-cyan-400" />
-                    <h3 className="text-lg font-semibold text-white">Up Next</h3>
-                  </div>
-                  <p className="text-slate-400 text-sm">Coming soon</p>
-                </div>
-                <div className="space-y-3">
-                  {[
-                    'Voice-Driven Game Design',
-                    'Cross-Platform Publishing',
-                    'AI-Powered Music Generation',
-                    'VR/AR Game Support'
-                  ].map((item, idx) => (
-                    <div key={idx} className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-4 hover:scale-[1.02] transition-all">
-                      <p className="text-white font-medium">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Completed */}
-              <div className="flex-1 space-y-4">
-                <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-green-400/30 p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <CheckCircle className="w-6 h-6 text-green-400" />
-                    <h3 className="text-lg font-semibold text-white">Completed</h3>
-                  </div>
-                  <p className="text-slate-400 text-sm">Shipped and live</p>
-                </div>
-                <div className="space-y-3">
-                  {[
-                    'Core AI Game Generator',
-                    'Community Marketplace',
-                    'Credit-Based Economy',
-                    'Advanced Analytics',
-                    'Smart Asset Optimization'
-                  ].map((item, idx) => (
-                    <div key={idx} className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-xl border border-white/10 p-4 hover:scale-[1.02] transition-all">
-                      <p className="text-white font-medium">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <RoadmapCarousel
+              items={[
+                {
+                  title: 'Core AI Game Generator',
+                  status: 'completed',
+                  description: 'Create full games from text descriptions'
+                },
+                {
+                  title: 'Community Marketplace',
+                  status: 'completed',
+                  description: 'Discover and share games with creators'
+                },
+                {
+                  title: 'Credit-Based Economy',
+                  status: 'completed',
+                  description: 'Earn and spend credits for platform actions'
+                },
+                {
+                  title: 'Advanced Analytics',
+                  status: 'completed',
+                  description: 'Track game performance metrics'
+                },
+                {
+                  title: 'Advanced AI Game Physics',
+                  status: 'in-progress',
+                  description: 'Realistic physics simulations for games'
+                },
+                {
+                  title: 'Real-time Multiplayer Support',
+                  status: 'in-progress',
+                  description: 'Connect players in live sessions'
+                },
+                {
+                  title: 'Enhanced 3D Asset Library',
+                  status: 'in-progress',
+                  description: 'Expanded assets for better visuals'
+                },
+                {
+                  title: 'Voice-Driven Game Design',
+                  status: 'upcoming',
+                  description: 'Create games using voice commands'
+                },
+                {
+                  title: 'Cross-Platform Publishing',
+                  status: 'upcoming',
+                  description: 'Deploy games to multiple platforms'
+                },
+                {
+                  title: 'AI-Powered Music Generation',
+                  status: 'upcoming',
+                  description: 'Generate custom soundtracks for games'
+                },
+                {
+                  title: 'VR/AR Game Support',
+                  status: 'upcoming',
+                  description: 'Create immersive VR and AR experiences'
+                },
+                {
+                  title: 'Smart Asset Optimization',
+                  status: 'completed',
+                  description: 'Automatic performance optimization'
+                }
+              ]}
+            />
           </div>
         </FadeInSection>
       )}
