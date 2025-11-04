@@ -197,7 +197,15 @@ const GeneratePage: React.FC = () => {
       </main>
 
       {/* Right Sidebar - Game Generation Panel - Collapsible & Responsive */}
-      <aside className={`${sidebarCollapsed ? 'w-0' : 'w-72'} bg-slate-900/50 border-l border-slate-800 overflow-y-auto transition-all duration-300 hidden lg:flex flex-col`}>
+      <aside className={`${sidebarCollapsed ? 'w-0' : 'w-72'} bg-slate-900/50 border-l border-slate-800 overflow-hidden transition-all duration-300 hidden lg:flex flex-col relative`}>
+        {/* Collapse/Expand Button - Always Visible */}
+        <button
+          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+          className="absolute -left-10 top-4 p-2 hover:bg-slate-700/50 rounded transition-colors text-slate-400 hover:text-white"
+          title={sidebarCollapsed ? "Expand" : "Collapse"}
+        >
+          {sidebarCollapsed ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+        </button>
         <div className="p-4 flex-1 overflow-y-auto">
           {/* Header */}
           <div className="flex items-center justify-between gap-2 mb-6">
@@ -205,13 +213,6 @@ const GeneratePage: React.FC = () => {
               <Palette className="w-5 h-5 text-purple-400" />
               <h2 className="text-lg font-semibold">Game Style</h2>
             </div>
-            <button
-              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="p-1 hover:bg-slate-700/50 rounded transition-colors"
-              title={sidebarCollapsed ? "Expand" : "Collapse"}
-            >
-              {sidebarCollapsed ? <ChevronLeft className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-            </button>
           </div>
 
           {/* Game Style Presets */}
