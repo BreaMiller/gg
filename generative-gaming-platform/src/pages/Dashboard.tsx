@@ -473,7 +473,7 @@ const HomePage: React.FC = () => {
             <div>
               <h2 className="text-2xl font-bold text-white flex items-center gap-2 mb-6">
                 <Star className="w-6 h-6 text-slate-400" />
-                All Featured Games
+                My Downloads
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-max">
                 {featuredGames.slice(0, 6).map((game, index) => (
