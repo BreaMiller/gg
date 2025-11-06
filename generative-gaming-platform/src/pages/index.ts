@@ -8,6 +8,7 @@ export { default as TrendingPage } from './TrendingPage';
 export { default as FeaturedPage } from './FeaturedPage';
 export { default as CreatorHubPage } from './CreatorHubPage';
 export { default as LeaderboardsPage } from './LeaderboardsPage';
+export { default as RoadmapPage } from './RoadmapPage';
 export { default as SettingsPage } from './SettingsPage';
 export { default as HelpSupportPage } from './HelpSupportPage';
 export { default as HelpArticlePage } from './HelpArticlePage';

@@ -18,6 +18,7 @@ import HelpSupportPage from './pages/HelpSupportPage';
 import HelpArticlePage from './pages/HelpArticlePage';
 import PricingPage from './pages/PricingPage';
 import ArticlePage from './pages/ArticlePage';
+import RoadmapPage from './pages/RoadmapPage';
 import './App.css';
 
 const App: React.FC = () => {
@@ -40,6 +41,7 @@ const App: React.FC = () => {
                 <Route path="featured" element={<FeaturedPage />} />
                 <Route path="community" element={<CreatorHubPage />} />
                 <Route path="leaderboards" element={<LeaderboardsPage />} />
+                <Route path="roadmap" element={<RoadmapPage />} />
                 <Route path="settings" element={<SettingsPage />} />
                 <Route path="help" element={<HelpSupportPage />} />
                 <Route path="help-article/:articleId" element={<HelpArticlePage />} />
