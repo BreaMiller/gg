@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { HelpCircle, Search, BookOpen, Lightbulb, Zap, Users, Headphones, Clock, CheckCircle, ArrowRight, BookMarked, Compass, Route, BarChart3 } from 'lucide-react';
+import { HelpCircle, Search, BookOpen, Lightbulb, Zap, Users, Headphones, Clock, CheckCircle, ArrowRight, BookMarked, Compass, Route, BarChart3, MapPin, Lightbulb as Idea } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FadeInSection from '../components/ui/FadeInSection';
-import RoadmapCarousel from '../components/ui/RoadmapCarousel';
+import FeatureRequestModal from '../components/ui/FeatureRequestModal';
 
 const HelpSupportPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [isFeatureModalOpen, setIsFeatureModalOpen] = useState(false);
 
   const categories = [
     {
@@ -262,79 +263,54 @@ const HelpSupportPage: React.FC = () => {
         </FadeInSection>
       )}
 
-      {/* Platform Roadmap */}
+      {/* Platform Roadmap Section */}
       {!searchQuery && !selectedCategory && (
         <FadeInSection delay={300}>
-          <div className="max-w-6xl mx-auto">
-            <RoadmapCarousel
-              items={[
-                {
-                  title: 'Core AI Game Generator',
-                  status: 'completed',
-                  description: 'Create full games from text descriptions'
-                },
-                {
-                  title: 'Community Marketplace',
-                  status: 'completed',
-                  description: 'Discover and share games with creators'
-                },
-                {
-                  title: 'Credit-Based Economy',
-                  status: 'completed',
-                  description: 'Earn and spend credits for platform actions'
-                },
-                {
-                  title: 'Advanced Analytics',
-                  status: 'completed',
-                  description: 'Track game performance metrics'
-                },
-                {
-                  title: 'Advanced AI Game Physics',
-                  status: 'in-progress',
-                  description: 'Realistic physics simulations for games'
-                },
-                {
-                  title: 'Real-time Multiplayer Support',
-                  status: 'in-progress',
-                  description: 'Connect players in live sessions'
-                },
-                {
-                  title: 'Enhanced 3D Asset Library',
-                  status: 'in-progress',
-                  description: 'Expanded assets for better visuals'
-                },
-                {
-                  title: 'Voice-Driven Game Design',
-                  status: 'upcoming',
-                  description: 'Create games using voice commands'
-                },
-                {
-                  title: 'Cross-Platform Publishing',
-                  status: 'upcoming',
-                  description: 'Deploy games to multiple platforms'
-                },
-                {
-                  title: 'AI-Powered Music Generation',
-                  status: 'upcoming',
-                  description: 'Generate custom soundtracks for games'
-                },
-                {
-                  title: 'VR/AR Game Support',
-                  status: 'upcoming',
-                  description: 'Create immersive VR and AR experiences'
-                },
-                {
-                  title: 'Smart Asset Optimization',
-                  status: 'completed',
-                  description: 'Automatic performance optimization'
-                }
-              ]}
-            />
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <h2 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
+                <MapPin className="w-8 h-8 text-cyan-400" />
+                Explore Our Roadmap
+              </h2>
+              <p className="text-slate-400 mb-8 text-lg">
+                Discover what's coming next and shape the future of Good Games with your feedback.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* View Roadmap Button */}
+                <button
+                  onClick={() => navigate('/roadmap')}
+                  className="group bg-gradient-to-br from-slate-800/60 to-slate-700/60 border border-cyan-500/30 hover:border-cyan-400/60 rounded-xl p-6 transition-all duration-300 hover:from-slate-800/80 hover:to-slate-700/80 flex flex-col items-start gap-4"
+                >
+                  <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors">
+                    <Route className="w-6 h-6 text-cyan-400" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">View Roadmap</h3>
+                    <p className="text-slate-400 text-sm">See our development timeline and upcoming features in detail</p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform mt-auto" />
+                </button>
+
+                {/* Feature Request Button */}
+                <button
+                  onClick={() => setIsFeatureModalOpen(true)}
+                  className="group bg-gradient-to-br from-slate-800/60 to-slate-700/60 border border-purple-500/30 hover:border-purple-400/60 rounded-xl p-6 transition-all duration-300 hover:from-slate-800/80 hover:to-slate-700/80 flex flex-col items-start gap-4"
+                >
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:bg-purple-500/30 transition-colors">
+                    <Idea className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-bold text-white mb-1 group-hover:text-purple-300 transition-colors">Request a Feature</h3>
+                    <p className="text-slate-400 text-sm">Tell us what features you'd like to see on Good Games</p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform mt-auto" />
+                </button>
+              </div>
+            </div>
           </div>
         </FadeInSection>
-      )}
-
-      {/* Contact Support CTA */}
+      )}      {/* Contact Support CTA */}
       {!searchQuery && !selectedCategory && (
         <FadeInSection delay={400}>
           <div className="max-w-2xl mx-auto">
@@ -358,6 +334,12 @@ const HelpSupportPage: React.FC = () => {
           </div>
         </FadeInSection>
       )}
+
+      {/* Feature Request Modal */}
+      <FeatureRequestModal
+        isOpen={isFeatureModalOpen}
+        onClose={() => setIsFeatureModalOpen(false)}
+      />
     </div>
   );
 };
